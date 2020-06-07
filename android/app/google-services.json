@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "720180641407",
+    "firebase_url": "https://benny-brew-crew.firebaseio.com",
+    "project_id": "benny-brew-crew",
+    "storage_bucket": "benny-brew-crew.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:720180641407:android:c4b85702c5098f06cd894a",
+        "android_client_info": {
+          "package_name": "com.benny.brew_crew"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "720180641407-kr3ecv1v39k59h5b5sh39o8cktpnq47q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGYrKtdLkZmT28WKVy2TeBB24f-xaZNRo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "720180641407-kr3ecv1v39k59h5b5sh39o8cktpnq47q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
