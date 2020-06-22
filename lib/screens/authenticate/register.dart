@@ -2,23 +2,24 @@ import 'package:brew_crew/services/auth.dart';
 import 'package:brew_crew/shared/loading.dart';
 import 'package:flutter/material.dart';
 
-class SignIn extends StatefulWidget {
+class Register extends StatefulWidget {
   final Function toggleView;
-  SignIn({this.toggleView});
+
+  Register({this.toggleView});
 
   @override
-  _SignInState createState() => _SignInState();
+  _RegisterState createState() => _RegisterState();
 }
 
-class _SignInState extends State<SignIn> {
+class _RegisterState extends State<Register> {
   String email = '';
   String password = '';
   String error = '';
   bool loading = false;
 
+  final AuthService _auth = AuthService();
   final _formkey = GlobalKey<FormState>();
 
-  final AuthService _auth = AuthService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,14 +27,14 @@ class _SignInState extends State<SignIn> {
       appBar: AppBar(
         backgroundColor: Colors.brown[400],
         elevation: 0.0,
-        title: Text('Sign in to Brew Crew'),
+        title: Text('Register to Brew Crew'),
         actions: <Widget>[
           FlatButton.icon(
               onPressed: () {
                 widget.toggleView();
               },
               icon: Icon(Icons.person),
-              label: Text('Register'))
+              label: Text('Login'))
         ],
       ),
       body: loading
@@ -52,8 +53,7 @@ class _SignInState extends State<SignIn> {
                           hintText: 'Email',
                           fillColor: Colors.white12,
                           filled: true),
-                      validator: (val) =>
-                          val.isEmpty ? 'Cannot be empty' : null,
+                      validator: (val) => val.isEmpty ? 'Enter Email' : null,
                       onChanged: (val) {
                         setState(() {
                           email = val;
@@ -68,8 +68,9 @@ class _SignInState extends State<SignIn> {
                           hintText: 'Password',
                           fillColor: Colors.white12,
                           filled: true),
-                      validator: (val) =>
-                          val.isEmpty ? 'Minimum 6 Characters' : null,
+                      validator: (val) => val.length < 6
+                          ? 'Password should be minimum 6 characters'
+                          : null,
                       obscureText: true,
                       onChanged: (val) {
                         setState(() {
@@ -83,7 +84,7 @@ class _SignInState extends State<SignIn> {
                     RaisedButton(
                       color: Colors.pink[400],
                       child: Text(
-                        'Sign In',
+                        'Register',
                         style: TextStyle(color: Colors.white),
                       ),
                       onPressed: () async {
@@ -91,25 +92,23 @@ class _SignInState extends State<SignIn> {
                           setState(() {
                             loading = true;
                           });
+                          print(email);
+                          print(password);
                           dynamic result = await _auth
-                              .signInWithEmailAndPassword(email, password);
+                              .registerWithEmailAndPassword(email, password);
                           if (result == null) {
                             setState(() {
-                              error = 'Check Username and Password';
                               loading = false;
+                              error = 'Enter a Valid Email';
                             });
                           }
                         }
-                        print(email);
-                        print(password);
                       },
                     ),
-                    SizedBox(
-                      height: 20.0,
-                    ),
+                    SizedBox(height: 2.0),
                     Text(
                       error,
-                      style: TextStyle(color: Colors.red, fontSize: 20.0),
+                      style: TextStyle(color: Colors.red, fontSize: 14.0),
                     )
                   ],
                 ),
